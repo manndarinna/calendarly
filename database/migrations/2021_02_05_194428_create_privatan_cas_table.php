@@ -17,7 +17,7 @@ class CreatePrivatanCasTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('zakazao_id');
             $table->foreign('zakazao_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->unsignedBigInteger('rezervisao_id');
+            $table->unsignedBigInteger('rezervisao_id')->nullable();
             $table->foreign('rezervisao_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->date('datum');
             $table->integer('trajanje');

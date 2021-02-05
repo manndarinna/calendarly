@@ -14,7 +14,7 @@
                             </div>
                         @endif
 
-                        JA SAM PRO AKAUNT!!!! CESTITAJTE MI
+                        TESTSETSETSET
                     </div>
                 </div>
             </div>

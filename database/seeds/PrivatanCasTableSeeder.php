@@ -33,7 +33,6 @@ class PrivatanCasTableSeeder extends Seeder
         ]);
         PrivatanCas::create([
             'zakazao_id' => 3,
-            'rezervisao_id' => 1,
             'datum' => Carbon::today()->addDays(rand(6, 365)),
             'trajanje' => rand(3600, 10800),
         ]);

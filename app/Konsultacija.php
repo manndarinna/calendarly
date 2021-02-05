@@ -6,8 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Konsultacija extends Model
 {
+
     public $table = "konsultacija";
     public $timestamps = false;
+    protected $fillable = [
+        'naziv', 'opis', 'max_prijava', 'zakazao_id'
+    ];
 
     public function zakazao()
     {
@@ -19,12 +23,16 @@ class Konsultacija extends Model
     }
     public function povecaj()
     {
-        $this->broj_prijava++;
-        $this->save();
+        if ($this->max_prijava >= $this->broj_prijava) {
+            $this->broj_prijava++;
+            $this->save();
+        }
     }
     public function smanji()
     {
-        $this->broj_prijava++;
-        $this->save();
+        if ($this->broj_prijava >= 0) {
+            $this->broj_prijava--;
+            $this->save();
+        }
     }
 }

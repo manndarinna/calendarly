@@ -38,9 +38,9 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         @auth
-                            @if (Auth::user()->hasRole('pro'))
-                                <a class="btn btn-secondary btn-lg" href="{{ route('proaccount.index') }}"> Pro AKAUNT</a>
-                            @endif
+                            <a class="btn btn-secondary" href="{{ route('korisnik.index') }}"> Korisnici</a>
+                            <a class="btn btn-secondary" href="{{ route('privatan-cas.index') }}"> Moji Casovi</a>
+                            <a class="btn btn-secondary" href="{{ route('konsultacija.index') }}"> Moje konsultacije</a>
                         @endauth
                     </ul>
 
@@ -64,8 +64,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                     document.getElementById('logout-form').submit();">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                                                         document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 

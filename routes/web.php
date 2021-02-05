@@ -18,3 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('/korisnik', 'UserController', ['except' => ['create', 'store', 'destroy', 'edit', 'update']])->middleware('auth');
+Route::resource('/privatan-cas', 'PrivatanCasController', ['except' => ['create', 'edit', 'update', 'show']])->middleware('auth');
+Route::resource('/konsultacija', 'KonsultacijaController', ['except' => ['create', 'edit', 'update', 'show']])->middleware('auth');
