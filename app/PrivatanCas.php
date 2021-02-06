@@ -8,7 +8,7 @@ class PrivatanCas extends Model
 {
     public $timestamps = false;
     protected $fillable = [
-        'zakazao_id', 'datum', 'trajanje'
+        'zakazao_id', 'rezervisao_id', 'datum', 'trajanje'
     ];
     public function zakazao()
     {

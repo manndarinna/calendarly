@@ -41,4 +41,13 @@ class PrivatanCasController extends Controller
             'rezervisao' => $rezervisao,
         ]);
     }
+    public function update($id)
+    {
+        echo $id;
+        $cas = PrivatanCas::find($id);
+        if(!$cas->rezervisao_id)
+        $cas->rezervisao_id = Auth::user()->id;
+        $cas->save();
+        return redirect('home')
+    }
 }

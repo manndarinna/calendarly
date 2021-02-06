@@ -15,6 +15,7 @@ class CreatePrivatanCasTable extends Migration
     {
         Schema::create('privatan_cas', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('naziv');
             $table->unsignedBigInteger('zakazao_id');
             $table->foreign('zakazao_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('rezervisao_id')->nullable();

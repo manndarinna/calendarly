@@ -35,4 +35,8 @@ class Konsultacija extends Model
             $this->save();
         }
     }
+    public function postojiUser($id)
+    {
+        return $this->prijavljeni()->where('user_id', $id)->exists();
+    }
 }

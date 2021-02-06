@@ -57,7 +57,7 @@ class User extends Authenticatable
     }
     public function mojiCasovi()
     {
-        return $this->hasMany('App\Konsultacija', 'zakazao_id', 'id');
+        return $this->hasMany('App\PrivatanCas', 'zakazao_id', 'id');
     }
     private function maxKonsultacija()
     {
