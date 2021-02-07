@@ -42,7 +42,39 @@
                                         </td>
                                     </tr>
                                 @endforeach
+                                <tr>
+                                    <form method="post" action={{ 'http://127.0.0.1:8000/konsultacija/' }}>
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col-4">
+                                                Naziv:
+                                                <br>
+                                                <input type="text" name="naziv" placeholder="Cas iz matematike" id="">
+                                            </div>
+                                            <div class="col-8">
+                                                Opis:
+                                                <br>
+                                                <input type="text" name="opis" placeholder="Kratak opis konsultacije" id="">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4">
+                                                Datum:
+                                                <br>
+                                                <input col="col" type="datetime-local" name="datum" id="">
+                                            </div>
+                                            <div class="col">
+                                                Maximum pristalica:
+                                                <br>
+                                                <input type="number" min="0" max="59" name="max_pristalica" id="">
+                                            </div>
+                                            <input class="btn btn-primary" type="submit" value="Dodaj konsultaciju!">
+                                        </div>
 
+                                    </form>
+
+                                </tr>
+                                <br>
                             </tbody>
                         </table>
                         {{ $konsultacije->links() }}

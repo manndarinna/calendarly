@@ -10,7 +10,7 @@ class Konsultacija extends Model
     public $table = "konsultacija";
     public $timestamps = false;
     protected $fillable = [
-        'naziv', 'opis', 'max_prijava', 'zakazao_id'
+        'naziv', 'opis', 'max_prijava', 'zakazao_id', 'datum'
     ];
 
     public function zakazao()

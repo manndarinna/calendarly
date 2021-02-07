@@ -16,14 +16,16 @@ class KonsultacijaController extends Controller
     public function store(Request $request)
     {
 
-        if (Auth::user()->imaMestaZaKonsultaciju())
+        if (Auth::user()->imaMestaZaKonsultaciju()) {
             Konsultacija::create([
                 'naziv' => $request->naziv,
                 'opis' => $request->opis,
-                'max_prijava' => $request->max_prijava,
-                'zakazao_id' => $request->Auth::user()->id
+                'datum' => $request->datum,
+                'max_prijava' => $request->max_pristalica,
+                'zakazao_id' => Auth::user()->id
             ]);
-        else return response()->json([
+            return back();
+        } else return response()->json([
             'err' => "Vec imate maksimalan broj konsultacija kreiranih!"
         ]);
     }
@@ -31,6 +33,7 @@ class KonsultacijaController extends Controller
     {
         if (Auth::user()->mojeKonsultacije()->find($id)->exists())
             Konsultacija::find($id)->delete();
+        return back();
     }
     public function show($id)
     {
