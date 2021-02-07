@@ -79,7 +79,7 @@ class User extends Authenticatable
     public function imaMestaZaCas()
     {
         $brojCasova = $this->mojiCasovi()->count();
-        return $brojCasova < $this->mojiCasovi();
+        return $brojCasova < $this->maxCasova();
     }
     public function postojiUKonsultaciji($id)
     {

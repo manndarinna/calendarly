@@ -20,7 +20,8 @@
                                     <th>Naziv</th>
                                     <th>Datum</th>
                                     <th>Trajanje</th>
-                                    <th>Akcije</th>
+                                    <th>Rezervisao</th>
+                                    <th>Akcija</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -32,13 +33,13 @@
                                             {{ strval(intval($c->trajanje / 3600)) }}:{{ strval(intval($c->trajanje / 60) % 60) }}
                                         </td>
                                         <td>
-                                            <form method="post"
-                                                action={{ 'http://127.0.0.1:8000/privatan-cas/' . $c->id }}>
+                                            {{ $c->rezervisao_id ? $c->rezervisao->name : 'nije rezervisan' }}
+                                        </td>
+                                        <td>
+                                            <form method="post" action="{{ url('privatan-cas/' . $c->id) }}">
                                                 @csrf
-                                                @method('put')
-                                                <input class="btn btn-primary"
-                                                    {{ $c->rezervisao_id > 0 ? 'disabled' : '' }} type="submit"
-                                                    value="Rezervisi">
+                                                @method('delete')
+                                                <input class="btn btn-danger" type="submit" value="Izbrisi">
                                             </form>
                                         </td>
                                     </tr>
@@ -47,6 +48,34 @@
                             </tbody>
                         </table>
                         {{ $casovi->links() }}
+
+                        <form method="post" action={{ 'http://127.0.0.1:8000/privatan-cas/' }}>
+                            @csrf
+                            <div class="row">
+                                <div class="col-4">
+                                    Naziv:
+                                    <br>
+                                    <input col="col" type="text" name="naziv" placeholder="Cas iz matematike" id="">
+                                </div>
+                                <div class="col-4">
+                                    Datum:
+                                    <br>
+                                    <input col="col" type="date" name="datum" id="">
+                                </div>
+                                <div class="col-2">
+                                    Sati:
+                                    <br>
+                                    <input type="number" min="0" max="59" name="sati" id="">
+                                </div>
+                                <div class="col-2">
+                                    Minuti:
+                                    <br>
+                                    <input type="number" min="0" max="59" name="minuti" id="">
+                                </div>
+
+                            </div>
+                            <input class="btn btn-primary" type="submit" value="Dodaj cas!">
+                        </form>
                     </div>
                 </div>
             </div>
