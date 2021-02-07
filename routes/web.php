@@ -19,5 +19,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/korisnik', 'UserController', ['except' => ['create', 'store', 'destroy', 'edit', 'update']])->middleware('auth');
-Route::resource('/privatan-cas', 'PrivatanCasController', ['except' => ['create', 'edit', 'show']])->middleware('auth');
-Route::resource('/konsultacija', 'KonsultacijaController', ['except' => ['create', 'edit', 'show']])->middleware('auth');
+Route::resource('/privatan-cas', 'PrivatanCasController', ['except' => ['create', 'edit']])->middleware('auth');
+Route::resource('/konsultacija', 'KonsultacijaController', ['except' => ['create', 'edit']])->middleware('auth');

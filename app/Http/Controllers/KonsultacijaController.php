@@ -10,7 +10,7 @@ class KonsultacijaController extends Controller
 {
     public function index()
     {
-        $konsultacije = Auth::user()->mojeKonsultacije()->get();
+        $konsultacije = Auth::user()->mojeKonsultacije()->paginate(6);
         return view('konsultacije')->with('konsultacije', $konsultacije);
     }
     public function store(Request $request)
@@ -36,9 +36,19 @@ class KonsultacijaController extends Controller
     {
         $konsultacija = Konsultacija::find($id);
         $ucesnici = $konsultacija->prijavljeni()->orderBy('name', 'desc')->get();
-        return view('konsultacije', [
+        return view('konsultacija', [
             'konsultacija' => $konsultacija,
             'ucesnici' => $ucesnici,
         ]);
+    }
+    public function update($id)
+    {
+        if (Auth::user()->postojiUKonsultaciji($id)) {
+            return back();
+        }
+        $konsultacija = Konsultacija::find($id);
+        $konsultacija->prijavljeni()->attach([Auth::id()]);
+        $konsultacija->povecaj();
+        return back();
     }
 }

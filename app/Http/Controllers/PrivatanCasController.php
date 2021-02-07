@@ -10,7 +10,7 @@ class PrivatanCasController extends Controller
 {
     public function index()
     {
-        $casovi = Auth::user()->mojiCasovi()->get();
+        $casovi = Auth::user()->mojiCasovi()->paginate(6);
         return view('casovi')->with('casovi', $casovi);
     }
     public function store(Request $request)
@@ -45,9 +45,9 @@ class PrivatanCasController extends Controller
     {
         echo $id;
         $cas = PrivatanCas::find($id);
-        if(!$cas->rezervisao_id)
-        $cas->rezervisao_id = Auth::user()->id;
+        if (!$cas->rezervisao_id)
+            $cas->rezervisao_id = Auth::user()->id;
         $cas->save();
-        return redirect('home')
+        return redirect('home');
     }
 }

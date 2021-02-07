@@ -81,4 +81,9 @@ class User extends Authenticatable
         $brojCasova = $this->mojiCasovi()->count();
         return $brojCasova < $this->mojiCasovi();
     }
+    public function postojiUKonsultaciji($id)
+    {
+        $exists = $this->konsultacije()->get()->contains($id);
+        return $exists;
+    }
 }

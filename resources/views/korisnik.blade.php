@@ -12,9 +12,11 @@
         @endif
 
         <div class="row">
+
             <div class="col-6">
-                <table class="table table-info">
-                    <thead>
+                Konsultacije korisnika
+                <table class="table table-warning">
+                    <thead class="thead-dark">
                         <tr>
                             <th>Naziv</th>
                             <th style="width:45%">Opis</th>
@@ -33,7 +35,10 @@
                                 <td>
                                     <form method="post" action="{{ url('konsultacija/' . $k->id) }}">
                                         @csrf
-                                        <input class="btn btn-primary " disabled type="submit" value="Rezervisi">
+                                        @method('put')
+                                        <input class="btn btn-primary "
+                                            {{ $k->broj_prijava == $k->max_prijava ? disabled : '' }} type="submit"
+                                            value="Rezervisi">
                                     </form>
                                 </td>
                             </tr>
@@ -44,8 +49,9 @@
                 {{ $konsultacije->links() }}
             </div>
             <div class="col-6">
-                <table class="table table-info">
-                    <thead>
+                Casovi korisnika
+                <table class="table table-warning">
+                    <thead class="thead-dark">
                         <tr>
                             <th>Naziv</th>
                             <th>Datum</th>

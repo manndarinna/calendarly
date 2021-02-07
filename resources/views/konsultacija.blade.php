@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Dashboard</div>
+                    <div class="card-header">Pregled konsultacije {{ $konsultacija->naziv }}</div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -14,7 +14,19 @@
                             </div>
                         @endif
 
-                        TESTSETSETSET
+                        <div>
+                            <h4>Opis:</h4>
+                            <p>{{ $konsultacija->opis }}</p>
+                        </div>
+                        <div>
+                            <h4>Datum:</h4>
+                            <p>{{ $konsultacija->datum }}</p>
+                        </div>
+                        <div>
+                            <h4>Prijavljeni korisnici::</h4>
+                            <p>{{ $konsultacija->datum }}</p>
+                        </div>
+
                     </div>
                 </div>
             </div>
