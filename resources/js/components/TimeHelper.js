@@ -12,6 +12,7 @@ export default class TimeHelper extends Component {
     }
 
     loadTime(e) {
+        e.preventDefault();
         https
             .get(
                 `https://worldtimeapi.org/api/timezone/${this.state.izabrani_kontinent}/${this.state.izabrani_grad}`,
