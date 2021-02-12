@@ -15,7 +15,7 @@
 
             <div class="col-6">
                 Konsultacije korisnika
-                <table class="table table-warning">
+                <table class="table ">
                     <thead class="thead-dark">
                         <tr>
                             <th>Naziv</th>
@@ -36,7 +36,7 @@
                                     <form method="post" action="{{ url('konsultacija/' . $k->id) }}">
                                         @csrf
                                         @method('put')
-                                        <input class="btn btn-primary "
+                                        <input class="btn rezervisi "
                                             {{ $k->broj_prijava == $k->max_prijava ? disabled : '' }} type="submit"
                                             value="Rezervisi">
                                     </form>
@@ -50,7 +50,7 @@
             </div>
             <div class="col-6">
                 Casovi korisnika
-                <table class="table table-warning">
+                <table class="table ">
                     <thead class="thead-dark">
                         <tr>
                             <th>Naziv</th>
@@ -71,7 +71,7 @@
                                     <form method="post" action={{ 'http://127.0.0.1:8000/privatan-cas/' . $c->id }}>
                                         @csrf
                                         @method('put')
-                                        <input class="btn btn-primary" {{ $c->rezervisao_id > 0 ? 'disabled' : '' }}
+                                        <input class="btn rezervisi" {{ $c->rezervisao_id > 0 ? 'disabled' : '' }}
                                             type="submit" value="Rezervisi">
                                     </form>
                                 </td>

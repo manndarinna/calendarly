@@ -24,7 +24,7 @@
                         </div>
                         <div>
                             <h4>Prijavljeni korisnici:</h4>
-                            <table class="table table-warning">
+                            <table class="table ">
                                 <thead class="thead-dark">
                                     <tr>
                                         <th>#</th>

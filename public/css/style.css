@@ -1,0 +1,40 @@
+body {
+    background-color: #b1cc74;
+    height: 100%;
+}
+
+nav,
+.card-header,
+.dodaj,
+.rezervisi,
+#btn-izracunaj {
+    background-color: #545f66 !important;
+    color: #d0f4ea;
+}
+.table .thead-dark th {
+    background-color: #545f66 !important;
+    color: #d0f4ea;
+}
+
+.nav-link,
+.btn-secondary {
+    color: #d0f4ea !important;
+}
+
+.card-body {
+    background-color: #d0f4ea !important;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+}
+.izbrisi,
+.pregledaj {
+    background-color: #e8fcc2;
+}
+.izbrisi:hover,
+.pregledaj:hover {
+    background-color: #d0f4ea;
+}

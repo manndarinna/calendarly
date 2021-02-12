@@ -74253,6 +74253,7 @@ var TimeHelper = /*#__PURE__*/function (_Component) {
     value: function loadTime(e) {
       var _this2 = this;
 
+      e.preventDefault();
       https__WEBPACK_IMPORTED_MODULE_2___default.a.get("https://worldtimeapi.org/api/timezone/".concat(this.state.izabrani_kontinent, "/").concat(this.state.izabrani_grad), function (resp) {
         var data = "";
         resp.on("data", function (chunk) {
@@ -74322,7 +74323,8 @@ var TimeHelper = /*#__PURE__*/function (_Component) {
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        className: "btn btn-warning btn-block",
+        id: "btn-izracunaj",
+        className: "btn  btn-block",
         type: "submit",
         value: "Izracunaj"
       })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
@@ -74358,8 +74360,8 @@ if (document.getElementById("timehelper")) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Mata\Desktop\laravelReact\projekti\projekatTut\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Mata\Desktop\laravelReact\projekti\projekatTut\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Mata\Desktop\laravelReact\projekti\calendarly\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Mata\Desktop\laravelReact\projekti\calendarly\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ }),

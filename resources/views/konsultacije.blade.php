@@ -14,7 +14,7 @@
                             </div>
                         @endif
 
-                        <table class="table table-warning">
+                        <table class="table">
                             <thead class="thead-dark">
                                 <tr>
                                     <th>Naziv</th>
@@ -35,9 +35,9 @@
                                             <form method="post" action="{{ url('konsultacija/' . $k->id) }}">
                                                 @csrf
                                                 @method('delete')
-                                                <input class="btn btn-block btn-danger" type="submit" value="Izbrisi">
+                                                <input class="btn btn-block izbrisi" type="submit" value="Izbrisi">
                                             </form>
-                                            <a class="btn btn-block btn-secondary"
+                                            <a class="btn btn-block pregledaj"
                                                 href="{{ url('konsultacija/' . $k->id) }}">Pregled</a>
                                         </td>
                                     </tr>
@@ -68,7 +68,7 @@
                                                 <br>
                                                 <input type="number" min="0" max="59" name="max_pristalica" id="">
                                             </div>
-                                            <input class="btn btn-primary" type="submit" value="Dodaj konsultaciju!">
+                                            <input class="btn dodaj" type="submit" value="Dodaj konsultaciju!">
                                         </div>
 
                                     </form>

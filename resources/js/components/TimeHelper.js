@@ -12,6 +12,7 @@ export default class TimeHelper extends Component {
     }
 
     loadTime(e) {
+        e.preventDefault();
         https
             .get(
                 `https://worldtimeapi.org/api/timezone/${this.state.izabrani_kontinent}/${this.state.izabrani_grad}`,
@@ -84,7 +85,8 @@ export default class TimeHelper extends Component {
 
                         <div className="col">
                             <input
-                                className="btn btn-warning btn-block"
+                                id="btn-izracunaj"
+                                className="btn  btn-block"
                                 type="submit"
                                 value="Izracunaj"
                             ></input>
