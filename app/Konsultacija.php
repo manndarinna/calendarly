@@ -23,14 +23,14 @@ class Konsultacija extends Model
     }
     public function povecaj()
     {
-        if ($this->max_prijava >= $this->broj_prijava) {
+        if ($this->max_prijava > $this->broj_prijava) {
             $this->broj_prijava++;
             $this->save();
         }
     }
     public function smanji()
     {
-        if ($this->broj_prijava >= 0) {
+        if ($this->broj_prijava > 0) {
             $this->broj_prijava--;
             $this->save();
         }

@@ -10,7 +10,7 @@ class KonsultacijaController extends Controller
 {
     public function index()
     {
-        $konsultacije = Auth::user()->mojeKonsultacije()->paginate(6);
+        $konsultacije = Auth::user()->mojeKonsultacije()->paginate(3);
         return view('konsultacije')->with('konsultacije', $konsultacije);
     }
     public function store(Request $request)
@@ -51,6 +51,7 @@ class KonsultacijaController extends Controller
         }
         $konsultacija = Konsultacija::find($id);
         $konsultacija->prijavljeni()->attach([Auth::id()]);
+
         $konsultacija->povecaj();
         return back();
     }
