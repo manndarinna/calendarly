@@ -16,7 +16,9 @@ class CreateKonsultacijaUsersTable extends Migration
         Schema::create('konsultacija_users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('konsultacija_id');
+            $table->foreign('konsultacija_id')->references('id')->on('konsultacija')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
