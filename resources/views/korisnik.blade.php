@@ -33,11 +33,11 @@
                                 <td>{{ $k->broj_prijava }}/{{ $k->max_prijava }}</td>
                                 <td>{{ $k->datum }}</td>
                                 <td>
-                                    <form method="post" action="{{ url('konsultacija/' . $k->id) }}">
+                                    <form class="prikljuciSeKonsultacijiForm">
                                         @csrf
-                                        @method('put')
+                                        <input type="number" class="idKonsultacije" hidden value="{{ $k->id }}">
                                         <input class="btn rezervisi "
-                                            {{ $k->broj_prijava == $k->max_prijava ? disabled : '' }} type="submit"
+                                            {{ $k->broj_prijava == $k->max_prijava ? 'disabled' : '' }} type="submit"
                                             value="Rezervisi">
                                     </form>
                                 </td>
@@ -68,9 +68,8 @@
                                     {{ strval(intval($c->trajanje / 3600)) }}:{{ strval(intval($c->trajanje / 60) % 60) }}
                                 </td>
                                 <td>
-                                    <form method="post" action={{ 'http://127.0.0.1:8000/privatan-cas/' . $c->id }}>
-                                        @csrf
-                                        @method('put')
+                                    <form method="post" class="rezervisiCasForm">
+                                        <input type="number" hidden class="idCasa" value="{{ $c->id }}">
                                         <input class="btn rezervisi" {{ $c->rezervisao_id > 0 ? 'disabled' : '' }}
                                             type="submit" value="Rezervisi">
                                     </form>

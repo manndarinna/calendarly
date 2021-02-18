@@ -48,12 +48,16 @@ class KonsultacijaController extends Controller
     public function update($id)
     {
         if (Auth::user()->postojiUKonsultaciji($id)) {
-            return back();
+            return response()->json([
+                'message' => 'Vec ste prijavljeni za ovu konsultaciju!'
+            ], 400);
         }
         $konsultacija = Konsultacija::find($id);
         $konsultacija->prijavljeni()->attach([Auth::id()]);
 
         $konsultacija->povecaj();
-        return back();
+        return response()->json([
+            'message' => 'Uspesna prijava za konsultaciju, vidimo se!'
+        ], 200);
     }
 }

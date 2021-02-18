@@ -16,6 +16,7 @@ export default class Cas extends Component {
                 <td></td>
                 <td></td>
                 <td></td>
+                <td></td>
                 <td>
                     {" "}
                     <a href={"http://127.0.0.1:8000/cas/" + this.state.cas.id}>

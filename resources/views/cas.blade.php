@@ -54,7 +54,7 @@
                                     type="text">
                             </div>
                         </div>
-                        <a href="{{ asset('/storage' . '/testfajl.txt' . '') }}" download>Download </a>
+                        <a href="{{ asset('/storage' . $cas->prilozeniDokument . '') }}" download>Preuzmite materijale</a>
                     </div>
                 </div>
             </div>

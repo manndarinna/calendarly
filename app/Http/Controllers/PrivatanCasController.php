@@ -21,21 +21,33 @@ class PrivatanCasController extends Controller
 
         return view('cas', ['cas' => $cas]);
     }
+    public function create()
+    {
+
+        return view('cas/formaZaCas');
+    }
 
 
     public function store(Request $request)
     {
-        $trajanje = $request->sati * 3600 + $request->minuti * 60;
+        $trajanje =  $request->get("sati") * 3600 + $request->get("minuti") * 60;
+        $prilozeniDokument = null;
+        if ($request->has('prilozeniDokument'))
+            $prilozeniDokument = $request->file('prilozeniDokument')->store('casoviDokumenti/', 'public');
+
         if (Auth::user()->imaMestaZaCas()) {
             PrivatanCas::create([
                 'naziv' => $request->naziv,
                 'zakazao_id' => Auth::user()->id,
                 'datum' => $request->datum,
                 'trajanje' => $trajanje,
+                'prilozeniDokument' => $prilozeniDokument,
             ]);
-            return back();
+            return response()->json([
+                'message' => "Uspesno dodat cas"
+            ]);
         } else return response()->json([
-            'err' => "Vec imate maksimalan broj casova kreiranih! Kupite PRO account!"
+            'message' => "Vec imate maksimalan broj casova kreiranih! Kupite PRO account!"
         ]);
     }
     public function destroy($id)
@@ -48,9 +60,15 @@ class PrivatanCasController extends Controller
     public function update($id)
     {
         $cas = PrivatanCas::find($id);
-        if (!$cas->rezervisao_id)
+
+        if (!$cas->rezervisao_id) {
             $cas->rezervisao_id = Auth::user()->id;
-        $cas->save();
-        return redirect('home');
+            $cas->save();
+            return response()->json([
+                'message' => 'Uspesna prijava za cas, vidimo se!'
+            ], 200);
+        } else return response()->json([
+            'message' => 'Cas je vec rezervisan!'
+        ], 400);
     }
 }

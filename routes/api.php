@@ -21,5 +21,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::middleware('auth:api')->get('/korisnik/get', 'UserController@get');
 
 Route::middleware('auth:api')->get('/privatan-cas/get', 'PrivatanCasController@get');
+Route::middleware('auth:api')->post('/privatan-cas/post', 'PrivatanCasController@store');
+Route::middleware('auth:api')->put('/privatan-cas/put/{test}', 'PrivatanCasController@update');
 
 Route::middleware('auth:api')->get('/konsultacija/get', 'KonsultacijaController@get');
+Route::middleware('auth:api')->put('/konsultacija/put/{konsultacija}', 'KonsultacijaController@update');

@@ -23,6 +23,7 @@ Route::get('/casovi', 'PageController@casovi')->middleware('auth');
 Route::get('/konsultacije', 'PageController@konsultacije')->middleware('auth');
 
 Route::get('/korisnik/{korisnik}', 'UserController@show')->middleware('auth');
+Route::get('/cas/create', 'PrivatanCasController@create')->middleware('auth');
 Route::get('/cas/{cas}', 'PrivatanCasController@show')->middleware('auth');
 
 // Route::resource('/korisnik', 'UserController', ['except' => ['create', 'store', 'destroy', 'edit', 'update']])->middleware('auth');

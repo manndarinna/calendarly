@@ -13,10 +13,6 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        Pregledajte ili dodajte cas na <br> <a class="btn btn-secondary"
-                            href="{{ route('privatan-cas.index') }}"> Moji Casovi</a> <br>
-                        Izvrsite uvid u Vase konsultacije na <br> <a class="btn btn-secondary"
-                            href="{{ route('konsultacija.index') }}"> Moje konsultacije</a>
                     </div>
                 </div>
             </div>
