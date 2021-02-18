@@ -9,7 +9,7 @@
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Styles -->
     <style>
         html,
@@ -68,6 +68,21 @@
 </head>
 
 <body>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script>
+        $.ajax({
+            type: "GET",
+            url: "http://127.0.0.1:8000/api/user",
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            success: function(response) {
+                console.log(response);
+            }
+        });
+
+    </script>
     <div class="flex-center position-ref full-height">
         @if (Route::has('login'))
             <div class="top-right links">
