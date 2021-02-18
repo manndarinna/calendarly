@@ -18,14 +18,17 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('/korisnici', 'PageController@korisnici')->middleware('auth');
 Route::get('/casovi', 'PageController@casovi')->middleware('auth');
 Route::get('/konsultacije', 'PageController@konsultacije')->middleware('auth');
 
+Route::get('/korisnik/getByName', 'UserController@getByName')->middleware('auth');
 Route::get('/korisnik/{korisnik}', 'UserController@show')->middleware('auth');
+
+
 Route::get('/cas/create', 'PrivatanCasController@create')->middleware('auth');
 Route::get('/cas/{cas}', 'PrivatanCasController@show')->middleware('auth');
 
-// Route::resource('/korisnik', 'UserController', ['except' => ['create', 'store', 'destroy', 'edit', 'update']])->middleware('auth');
-// Route::resource('/privatan-cas', 'PrivatanCasController', ['except' => ['create', 'edit']])->middleware('auth');
-// Route::resource('/konsultacija', 'KonsultacijaController', ['except' => ['create', 'edit']])->middleware('auth');
+Route::get('/konsultacija/{konsultacija}', 'KonsultacijaController@show')->middleware('auth');
+Route::get('/konsultacija/create', 'KonsultacijaController@create')->middleware('auth');

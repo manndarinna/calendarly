@@ -55,6 +55,12 @@
                             </div>
                         </div>
                         <a href="{{ asset('/storage' . $cas->prilozeniDokument . '') }}" download>Preuzmite materijale</a>
+                        <br>
+                        <form method="post" class="rezervisiCasForm">
+                            <input type="number" hidden class="idCasa" value="{{ $cas->id }}">
+                            <input class="btn rezervisi" {{ $cas->rezervisao_id > 0 ? 'disabled' : '' }} type="submit"
+                                value="Rezervisi">
+                        </form>
                     </div>
                 </div>
             </div>

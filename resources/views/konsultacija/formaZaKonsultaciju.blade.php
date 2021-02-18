@@ -14,8 +14,9 @@
                             </div>
                         @endif
 
-                        <a href="http://127.0.0.1:8000/konsultacija/create">Dodaj novu konsultaciju</a>
-                        <div id="konsultacije"></div>
+
+
+                        <div id="formaZaKonsultacije"></div>
                     </div>
                 </div>
             </div>

@@ -52,13 +52,13 @@ $(document).ready(function() {
             },
             success: function(response) {
                 alert(response.message);
+                $(this)
+                    .find('input[type="submit"]')
+                    .attr("disabled", "disabled");
             },
             error: function(err) {
                 alert(err.responseJSON.message);
             }
         });
-        $(this)
-            .find('input[type="submit"]')
-            .attr("disabled", "disabled");
     });
 });

@@ -17,3 +17,4 @@ require("./components/Pages/korisnici/Korisnici");
 require("./components/Pages/mojeKonsultacije/Konsultacije");
 require("./components/Pages/mojiCasovi/Casovi");
 require("./components/Pages/mojiCasovi/FormaZaCas");
+require("./components/Pages/mojeKonsultacije/FormaZaKonsultacije");

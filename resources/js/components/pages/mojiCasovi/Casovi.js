@@ -49,6 +49,13 @@ export default class Casovi extends Component {
         });
     }
 
+    deleteCas(cas) {
+        this.setState(prevState => {
+            return { casovi: prevState.casovi.filter(c => c.id != cas.id) };
+        });
+        console.log(cas);
+    }
+
     render() {
         return [
             <table className="table ">
@@ -63,7 +70,13 @@ export default class Casovi extends Component {
                 </thead>
                 <tbody>
                     {this.state.casovi.map(cas => {
-                        return <Cas key={cas.id} cas={cas} />;
+                        return (
+                            <Cas
+                                deleteCas={this.deleteCas.bind(this)}
+                                key={cas.id}
+                                cas={cas}
+                            />
+                        );
                     })}
                 </tbody>
             </table>,

@@ -19,10 +19,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     ]);
 });
 Route::middleware('auth:api')->get('/korisnik/get', 'UserController@get');
+Route::middleware('auth:api')->get('/korisnik/search', 'UserController@search');
 
-Route::middleware('auth:api')->get('/privatan-cas/get', 'PrivatanCasController@get');
-Route::middleware('auth:api')->post('/privatan-cas/post', 'PrivatanCasController@store');
-Route::middleware('auth:api')->put('/privatan-cas/put/{test}', 'PrivatanCasController@update');
+Route::middleware(['auth:api'])->group(function () {
+    Route::get('/privatan-cas/get', 'PrivatanCasController@get');
+    Route::post('/privatan-cas/post', 'PrivatanCasController@store');
+    Route::put('/privatan-cas/put/{cas}', 'PrivatanCasController@update');
+    Route::delete('/privatan-cas/delete/{cas}', 'PrivatanCasController@destroy');
+});
+
 
 Route::middleware('auth:api')->get('/konsultacija/get', 'KonsultacijaController@get');
 Route::middleware('auth:api')->put('/konsultacija/put/{konsultacija}', 'KonsultacijaController@update');
+Route::middleware('auth:api')->post('/konsultacija/post', 'KonsultacijaController@store');
+Route::middleware('auth:api')->delete('/konsultacija/delete/{konsultacija}', 'KonsultacijaController@destroy');

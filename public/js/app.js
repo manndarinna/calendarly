@@ -74148,6 +74148,8 @@ __webpack_require__(/*! ./components/Pages/mojiCasovi/Casovi */ "./resources/js/
 
 __webpack_require__(/*! ./components/Pages/mojiCasovi/FormaZaCas */ "./resources/js/components/Pages/mojiCasovi/FormaZaCas.js");
 
+__webpack_require__(/*! ./components/Pages/mojeKonsultacije/FormaZaKonsultacije */ "./resources/js/components/Pages/mojeKonsultacije/FormaZaKonsultacije.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -74214,6 +74216,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Korisnik__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Korisnik */ "./resources/js/components/Pages/korisnici/Korisnik.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -74252,11 +74256,15 @@ var Korisnici = /*#__PURE__*/function (_Component) {
     _this = _super.call(this, props);
     _this.state = {
       korisnici: [],
+      searchedKorisnici: [],
       controls: ""
     };
 
     _this.fetchKorisnici();
 
+    _this.prikaziDropdownSearch = _this.prikaziDropdownSearch.bind(_assertThisInitialized(_this));
+    _this.searchKorisnik = _this.searchKorisnik.bind(_assertThisInitialized(_this));
+    _this.delayTimer = Function();
     return _this;
   }
 
@@ -74302,9 +74310,48 @@ var Korisnici = /*#__PURE__*/function (_Component) {
       });
     }
   }, {
+    key: "searchKorisnik",
+    value: function searchKorisnik(e) {
+      var _this4 = this;
+
+      e.persist();
+      this.setState(_defineProperty({}, e.target.name, e.target.value));
+      clearTimeout(this.delayTimer);
+      this.delayTimer = setTimeout(function () {
+        console.log("test miki");
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("http://127.0.0.1:8000/api/korisnik/search?name=" + e.target.value).then(function (res) {
+          console.log(res.data.korisnici);
+
+          _this4.setState({
+            searchedKorisnici: res.data.korisnici
+          });
+        });
+      }, 1000);
+    }
+  }, {
+    key: "prikaziDropdownSearch",
+    value: function prikaziDropdownSearch() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        name: "search",
+        list: "search",
+        onChange: this.searchKorisnik
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+        className: "btn btn-primary",
+        href: "http://127.0.0.1:8000/korisnik/getByName?name=" + this.state.search
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+        "class": "fas fa-search"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("datalist", {
+        id: "search"
+      }, this.state.searchedKorisnici.map(function (sK) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
+          value: sK.name
+        });
+      })));
+    }
+  }, {
     key: "render",
     value: function render() {
-      return [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
+      return [this.prikaziDropdownSearch(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
         "class": "table table-info"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", {
         "class": "thead-dark"
@@ -74405,6 +74452,155 @@ if (document.getElementById("korisnik")) {
 
 /***/ }),
 
+/***/ "./resources/js/components/Pages/mojeKonsultacije/FormaZaKonsultacije.js":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/Pages/mojeKonsultacije/FormaZaKonsultacije.js ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return FormaZaKonsultacije; });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+var FormaZaKonsultacije = /*#__PURE__*/function (_Component) {
+  _inherits(FormaZaKonsultacije, _Component);
+
+  var _super = _createSuper(FormaZaKonsultacije);
+
+  function FormaZaKonsultacije(props) {
+    var _this;
+
+    _classCallCheck(this, FormaZaKonsultacije);
+
+    _this = _super.call(this, props);
+    _this.state = {};
+    _this.validacija = _this.validacija.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(FormaZaKonsultacije, [{
+    key: "handleChange",
+    value: function handleChange(e) {
+      this.setState(_defineProperty({}, e.target.name, e.target.value));
+    }
+  }, {
+    key: "validacija",
+    value: function validacija() {
+      if (!this.state.naziv || !this.state.datum || !this.state.opis || !this.state.max_pristalica) return false;
+      return true;
+    }
+  }, {
+    key: "dodajKonsultaciju",
+    value: function dodajKonsultaciju(e) {
+      e.preventDefault();
+      var formData = new FormData();
+      formData.append("naziv", this.state.naziv);
+      formData.append("datum", this.state.datum);
+      formData.append("opis", this.state.opis);
+      formData.append("max_pristalica", this.state.max_pristalica);
+      if (this.validacija()) axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("http://127.0.0.1:8000/api/konsultacija/post", formData).then(function (res) {
+        alert(res.data.message);
+      });else alert("Nepravilno uneta polja!");
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+        onSubmit: this.dodajKonsultaciju.bind(this)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        "class": "row"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        "class": "col-6"
+      }, "Naziv:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        onChange: this.handleChange.bind(this),
+        type: "text",
+        name: "naziv",
+        placeholder: "Cas iz matematike",
+        id: "",
+        className: "form-control"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        "class": "col"
+      }, "Datum:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        onChange: this.handleChange.bind(this),
+        col: "col",
+        type: "datetime-local",
+        name: "datum",
+        id: "",
+        className: "form-control"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        "class": "row"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        "class": "col-8"
+      }, "Opis:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+        onChange: this.handleChange.bind(this),
+        type: "text",
+        name: "opis",
+        placeholder: "Kratak opis konsultacije",
+        id: "",
+        className: "form-control"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        "class": "col"
+      }, "Maximum pristalica:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        onChange: this.handleChange.bind(this),
+        type: "number",
+        min: "0",
+        max: "59",
+        name: "max_pristalica",
+        id: "",
+        className: "form-control"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        "class": "btn dodaj",
+        type: "submit",
+        value: "Dodaj konsultacije!"
+      }));
+    }
+  }]);
+
+  return FormaZaKonsultacije;
+}(react__WEBPACK_IMPORTED_MODULE_1__["Component"]);
+
+
+
+if (document.getElementById("formaZaKonsultacije")) {
+  react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(FormaZaKonsultacije, null), document.getElementById("formaZaKonsultacije"));
+}
+
+/***/ }),
+
 /***/ "./resources/js/components/Pages/mojeKonsultacije/Konsultacija.js":
 /*!************************************************************************!*\
   !*** ./resources/js/components/Pages/mojeKonsultacije/Konsultacija.js ***!
@@ -74415,10 +74611,12 @@ if (document.getElementById("korisnik")) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Konsultacija; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -74444,6 +74642,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Konsultacija = /*#__PURE__*/function (_Component) {
   _inherits(Konsultacija, _Component);
 
@@ -74462,21 +74661,44 @@ var Konsultacija = /*#__PURE__*/function (_Component) {
   }
 
   _createClass(Konsultacija, [{
+    key: "deleteKonsultacija",
+    value: function deleteKonsultacija() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("http://127.0.0.1:8000/api/konsultacija/delete/" + this.state.konsultacija.id).then(function (res) {
+        alert(res.data.message);
+
+        _this2.props.deleteKonsultacija(_this2.state.konsultacija);
+      })["catch"](function (res) {
+        alert(res.data.message);
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, this.state.konsultacija.naziv), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", {
+        style: {
+          wordBreak: "break-all"
+        }
+      }, this.state.konsultacija.opis), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, this.state.konsultacija.broj_prijava + "/" + this.state.konsultacija.max_prijava), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, this.state.konsultacija.datum), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+        className: "btn btn-primary btn-block",
         href: "http://127.0.0.1:8000/konsultacija/" + this.state.konsultacija.id
-      }, "Prikazi detaljno"), " "));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+        className: "far fa-eye"
+      })), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+        className: "btn btn-block btn-danger",
+        onClick: this.deleteKonsultacija.bind(this)
+      }, "X"), " "));
     }
   }]);
 
   return Konsultacija;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+}(react__WEBPACK_IMPORTED_MODULE_1__["Component"]);
 
 
 
 if (document.getElementById("konsultacija")) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Konsultacija, null), document.getElementById("konsultacija"));
+  react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Konsultacija, null), document.getElementById("konsultacija"));
 }
 
 /***/ }),
@@ -74586,8 +74808,21 @@ var Konsultacije = /*#__PURE__*/function (_Component) {
       });
     }
   }, {
+    key: "deleteKonsultacija",
+    value: function deleteKonsultacija(konsultacija) {
+      this.setState(function (prevState) {
+        return {
+          konsultacije: prevState.konsultacije.filter(function (k) {
+            return k.id != konsultacija.id;
+          })
+        };
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this4 = this;
+
       return [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
         "class": "table"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", {
@@ -74598,6 +74833,8 @@ var Konsultacije = /*#__PURE__*/function (_Component) {
         }
       }, "Opis"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Prijave"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Datum"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Akcije"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, this.state.konsultacije.map(function (k) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Konsultacija__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          key: k.id,
+          deleteKonsultacija: _this4.deleteKonsultacija.bind(_this4),
           konsultacija: k
         });
       }))), this.state.controls];
@@ -74625,10 +74862,12 @@ if (document.getElementById("konsultacije")) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Cas; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -74654,6 +74893,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Cas = /*#__PURE__*/function (_Component) {
   _inherits(Cas, _Component);
 
@@ -74672,21 +74912,40 @@ var Cas = /*#__PURE__*/function (_Component) {
   }
 
   _createClass(Cas, [{
+    key: "deleteCas",
+    value: function deleteCas() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("http://127.0.0.1:8000/api/privatan-cas/delete/" + this.state.cas.id).then(function (res) {
+        alert(res.data.message);
+
+        _this2.props.deleteCas(_this2.state.cas);
+      })["catch"](function (res) {
+        alert(res.data.message);
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, this.state.cas.naziv), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, this.state.cas.datum), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, parseInt(this.state.cas.trajanje / 3600) + ":" + parseInt(this.state.cas.trajanje / 60) % 60), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, this.state.cas.rezervisao ? this.state.cas.rezervisao.email : "Nije rezervisan "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+        className: "btn btn-block btn-primary",
         href: "http://127.0.0.1:8000/cas/" + this.state.cas.id
-      }, "Prikazi detaljno"), " "));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+        className: "far fa-eye"
+      })), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+        className: "btn btn-block btn-danger",
+        onClick: this.deleteCas.bind(this)
+      }, "X"), " "));
     }
   }]);
 
   return Cas;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+}(react__WEBPACK_IMPORTED_MODULE_1__["Component"]);
 
 
 
 if (document.getElementById("cas")) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Cas, null), document.getElementById("cas"));
+  react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Cas, null), document.getElementById("cas"));
 }
 
 /***/ }),
@@ -74796,14 +75055,29 @@ var Casovi = /*#__PURE__*/function (_Component) {
       });
     }
   }, {
+    key: "deleteCas",
+    value: function deleteCas(cas) {
+      this.setState(function (prevState) {
+        return {
+          casovi: prevState.casovi.filter(function (c) {
+            return c.id != cas.id;
+          })
+        };
+      });
+      console.log(cas);
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this4 = this;
+
       return [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
         className: "table "
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", {
         className: "thead-dark"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Naziv"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Datum"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Trajanje"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Rezervisao"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Akcija"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, this.state.casovi.map(function (cas) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Cas__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          deleteCas: _this4.deleteCas.bind(_this4),
           key: cas.id,
           cas: cas
         });

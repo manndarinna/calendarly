@@ -52,14 +52,25 @@ class PrivatanCasController extends Controller
     }
     public function destroy($id)
     {
-        if (Auth::user()->mojiCasovi()->find($id)->exists())
+        if (Auth::user()->mojiCasovi()->find($id)->exists()) {
             PrivatanCas::find($id)->delete();
-        return back();
+            return response()->json([
+                'message' => "Cas uspesno obrisan."
+            ], 200);
+        }
+        return response()->json([
+            'message' => "Taj cas nije Vas."
+        ], 400);
     }
 
     public function update($id)
     {
         $cas = PrivatanCas::find($id);
+        if ($cas->zakazao_id == Auth::id())
+            return response()->json([
+                'message' => 'Ne mozete se prijaviti za Vas cas!'
+            ], 400);
+
 
         if (!$cas->rezervisao_id) {
             $cas->rezervisao_id = Auth::user()->id;

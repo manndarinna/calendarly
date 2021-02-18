@@ -44,7 +44,13 @@
                                 </tbody>
                             </table>
                         </div>
-
+                        <form class="prikljuciSeKonsultacijiForm">
+                            @csrf
+                            <input type="number" class="idKonsultacije" hidden value="{{ $konsultacija->id }}">
+                            <input class="btn rezervisi "
+                                {{ $konsultacija->broj_prijava == $konsultacija->max_prijava ? 'disabled' : '' }}
+                                type="submit" value="Rezervisi">
+                        </form>
                     </div>
                 </div>
             </div>

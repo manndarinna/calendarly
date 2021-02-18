@@ -9,9 +9,13 @@ export default class Korisnici extends Component {
 
         this.state = {
             korisnici: [],
+            searchedKorisnici: [],
             controls: ""
         };
         this.fetchKorisnici();
+        this.prikaziDropdownSearch = this.prikaziDropdownSearch.bind(this);
+        this.searchKorisnik = this.searchKorisnik.bind(this);
+        this.delayTimer = Function();
     }
 
     fetchKorisnici(pageUrl = "http://127.0.0.1:8000/api/korisnik/get?page=1?") {
@@ -49,8 +53,53 @@ export default class Korisnici extends Component {
         });
     }
 
+    searchKorisnik(e) {
+        e.persist();
+        this.setState({ [e.target.name]: e.target.value });
+        clearTimeout(this.delayTimer);
+        this.delayTimer = setTimeout(() => {
+            console.log("test miki");
+            Axios.get(
+                "http://127.0.0.1:8000/api/korisnik/search?name=" +
+                    e.target.value
+            ).then(res => {
+                console.log(res.data.korisnici);
+                this.setState({
+                    searchedKorisnici: res.data.korisnici
+                });
+            });
+        }, 1000);
+    }
+
+    prikaziDropdownSearch() {
+        return (
+            <div>
+                <input
+                    name="search"
+                    list="search"
+                    onChange={this.searchKorisnik}
+                ></input>
+                <a
+                    className="btn btn-primary"
+                    href={
+                        "http://127.0.0.1:8000/korisnik/getByName?name=" +
+                        this.state.search
+                    }
+                >
+                    <i class="fas fa-search"></i>
+                </a>
+
+                <datalist id="search">
+                    {this.state.searchedKorisnici.map(sK => {
+                        return <option value={sK.name} />;
+                    })}
+                </datalist>
+            </div>
+        );
+    }
     render() {
         return [
+            this.prikaziDropdownSearch(),
             <table class="table table-info">
                 <thead class="thead-dark">
                     <tr>

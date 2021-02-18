@@ -49,6 +49,15 @@ export default class Konsultacije extends Component {
             )
         });
     }
+    deleteKonsultacija(konsultacija) {
+        this.setState(prevState => {
+            return {
+                konsultacije: prevState.konsultacije.filter(
+                    k => k.id != konsultacija.id
+                )
+            };
+        });
+    }
 
     render() {
         return [
@@ -64,7 +73,15 @@ export default class Konsultacije extends Component {
                 </thead>
                 <tbody>
                     {this.state.konsultacije.map(k => {
-                        return <Konsultacija konsultacija={k} />;
+                        return (
+                            <Konsultacija
+                                key={k.id}
+                                deleteKonsultacija={this.deleteKonsultacija.bind(
+                                    this
+                                )}
+                                konsultacija={k}
+                            />
+                        );
                     })}
                 </tbody>
             </table>,
