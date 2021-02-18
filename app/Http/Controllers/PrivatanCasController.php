@@ -5,14 +5,24 @@ namespace App\Http\Controllers;
 use App\PrivatanCas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class PrivatanCasController extends Controller
 {
-    public function index()
+    public function get()
     {
-        $casovi = Auth::user()->mojiCasovi()->with('rezervisao')->paginate(6);
-        return view('casovi')->with('casovi', $casovi);
+        $casovi = Auth::user()->mojiCasovi()->with('rezervisao')->paginate(2);
+
+        return response()->json(['casovi' => $casovi]);
     }
+    public function show($idCasa)
+    {
+        $cas = PrivatanCas::find($idCasa);
+
+        return view('cas', ['cas' => $cas]);
+    }
+
+
     public function store(Request $request)
     {
         $trajanje = $request->sati * 3600 + $request->minuti * 60;

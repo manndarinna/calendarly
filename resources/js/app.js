@@ -13,3 +13,6 @@ require("./bootstrap");
  */
 
 require("./components/TimeHelper");
+require("./components/Pages/korisnici/Korisnici");
+require("./components/Pages/mojeKonsultacije/Konsultacije");
+require("./components/Pages/mojiCasovi/Casovi");

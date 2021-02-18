@@ -8,10 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function index()
+
+    public function get()
     {
-        $korisnici = User::where('id', '!=', Auth::id())->paginate(6);
-        return view('korisnici')->with('korisnici', $korisnici);
+        $korisnici = User::where('id', '!=', Auth::id())->paginate(1);
+        return response()->json(['korisnici' => $korisnici]);
     }
 
     public function show($id)

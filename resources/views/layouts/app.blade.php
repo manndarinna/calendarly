@@ -39,9 +39,9 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         @auth
-                            <a class="btn btn-secondary" href="{{ route('korisnik.index') }}"> Korisnici</a>
-                            <a class="btn btn-secondary" href="{{ route('privatan-cas.index') }}"> Moji Casovi</a>
-                            <a class="btn btn-secondary" href="{{ route('konsultacija.index') }}"> Moje konsultacije</a>
+                            <a class="btn btn-secondary" href="http://127.0.0.1:8000/korisnici"> Korisnici</a>
+                            <a class="btn btn-secondary" href="http://127.0.0.1:8000/casovi"> Moji Casovi</a>
+                            <a class="btn btn-secondary" href="http://127.0.0.1:8000/konsultacije"> Moje konsultacije</a>
                         @endauth
                     </ul>
 
@@ -67,7 +67,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                                                             document.getElementById('logout-form').submit();">
+                                                                                                                                                             document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 

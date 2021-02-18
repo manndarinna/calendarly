@@ -18,3 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
         'test' => "tes"
     ]);
 });
+Route::middleware('auth:api')->get('/korisnik/get', 'UserController@get');
+
+Route::middleware('auth:api')->get('/privatan-cas/get', 'PrivatanCasController@get');
+
+Route::middleware('auth:api')->get('/konsultacija/get', 'KonsultacijaController@get');

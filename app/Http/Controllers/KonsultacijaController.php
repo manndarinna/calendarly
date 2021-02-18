@@ -8,10 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class KonsultacijaController extends Controller
 {
-    public function index()
+
+    public function get()
     {
         $konsultacije = Auth::user()->mojeKonsultacije()->paginate(3);
-        return view('konsultacije')->with('konsultacije', $konsultacije);
+        return response()->json(['konsultacije' => $konsultacije]);
     }
     public function store(Request $request)
     {
