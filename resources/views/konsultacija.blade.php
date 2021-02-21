@@ -49,7 +49,7 @@
                             <input type="number" class="idKonsultacije" hidden value="{{ $konsultacija->id }}">
                             <input class="btn rezervisi "
                                 {{ $konsultacija->broj_prijava == $konsultacija->max_prijava ? 'disabled' : '' }}
-                                type="submit" value="Rezervisi">
+                                type="submit" value="Prijavi se">
                         </form>
                     </div>
                 </div>

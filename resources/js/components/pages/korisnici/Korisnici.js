@@ -58,7 +58,6 @@ export default class Korisnici extends Component {
         this.setState({ [e.target.name]: e.target.value });
         clearTimeout(this.delayTimer);
         this.delayTimer = setTimeout(() => {
-            console.log("test miki");
             Axios.get(
                 "http://127.0.0.1:8000/api/korisnik/search?name=" +
                     e.target.value

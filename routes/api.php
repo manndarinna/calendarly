@@ -13,11 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return response()->json([
-        'test' => "tes"
-    ]);
-});
+
 Route::middleware('auth:api')->get('/korisnik/get', 'UserController@get');
 Route::middleware('auth:api')->get('/korisnik/search', 'UserController@search');
 
@@ -28,8 +24,11 @@ Route::middleware(['auth:api'])->group(function () {
     Route::delete('/privatan-cas/delete/{cas}', 'PrivatanCasController@destroy');
 });
 
+Route::middleware('auth:api')->get('/rezervacije/casovi', 'RezervacijeController@rezervisaniCasovi');
 
-Route::middleware('auth:api')->get('/konsultacija/get', 'KonsultacijaController@get');
-Route::middleware('auth:api')->put('/konsultacija/put/{konsultacija}', 'KonsultacijaController@update');
-Route::middleware('auth:api')->post('/konsultacija/post', 'KonsultacijaController@store');
-Route::middleware('auth:api')->delete('/konsultacija/delete/{konsultacija}', 'KonsultacijaController@destroy');
+Route::middleware(['auth:api'])->group(function () {
+    Route::get('/konsultacija/get', 'KonsultacijaController@get');
+    Route::put('/konsultacija/put/{konsultacija}', 'KonsultacijaController@update');
+    Route::post('/konsultacija/post', 'KonsultacijaController@store');
+    Route::delete('/konsultacija/delete/{konsultacija}', 'KonsultacijaController@destroy');
+});

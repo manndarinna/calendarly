@@ -6,7 +6,9 @@ export default class FormaZaCas extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {};
+        this.state = {
+            prilozeniDokument: null
+        };
         this.validacija = this.validacija.bind(this);
     }
 
@@ -36,7 +38,8 @@ export default class FormaZaCas extends Component {
         formData.append("datum", this.state.datum);
         formData.append("sati", this.state.sati);
         formData.append("minuti", this.state.minuti);
-        formData.append("prilozeniDokument", this.state.prilozeniDokument);
+        if (this.state.prilozeniDokument != null)
+            formData.append("prilozeniDokument", this.state.prilozeniDokument);
         if (this.validacija())
             Axios.post(
                 "http://127.0.0.1:8000/api/privatan-cas/post",
@@ -74,7 +77,7 @@ export default class FormaZaCas extends Component {
                         <input
                             onChange={this.handleChange.bind(this)}
                             col="col"
-                            type="date"
+                            type="datetime-local"
                             name="datum"
                             id=""
                         ></input>

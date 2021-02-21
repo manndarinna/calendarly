@@ -74318,7 +74318,6 @@ var Korisnici = /*#__PURE__*/function (_Component) {
       this.setState(_defineProperty({}, e.target.name, e.target.value));
       clearTimeout(this.delayTimer);
       this.delayTimer = setTimeout(function () {
-        console.log("test miki");
         axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("http://127.0.0.1:8000/api/korisnik/search?name=" + e.target.value).then(function (res) {
           console.log(res.data.korisnici);
 
@@ -75151,7 +75150,9 @@ var FormaZaCas = /*#__PURE__*/function (_Component) {
     _classCallCheck(this, FormaZaCas);
 
     _this = _super.call(this, props);
-    _this.state = {};
+    _this.state = {
+      prilozeniDokument: null
+    };
     _this.validacija = _this.validacija.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -75182,7 +75183,7 @@ var FormaZaCas = /*#__PURE__*/function (_Component) {
       formData.append("datum", this.state.datum);
       formData.append("sati", this.state.sati);
       formData.append("minuti", this.state.minuti);
-      formData.append("prilozeniDokument", this.state.prilozeniDokument);
+      if (this.state.prilozeniDokument != null) formData.append("prilozeniDokument", this.state.prilozeniDokument);
       if (this.validacija()) axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("http://127.0.0.1:8000/api/privatan-cas/post", formData, {
         headers: {
           "content-type": "multipart/form-data"
@@ -75212,7 +75213,7 @@ var FormaZaCas = /*#__PURE__*/function (_Component) {
       }, "Datum:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
         onChange: this.handleChange.bind(this),
         col: "col",
-        type: "date",
+        type: "datetime-local",
         name: "datum",
         id: ""
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {

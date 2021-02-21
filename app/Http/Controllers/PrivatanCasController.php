@@ -33,7 +33,7 @@ class PrivatanCasController extends Controller
         $trajanje =  $request->get("sati") * 3600 + $request->get("minuti") * 60;
         $prilozeniDokument = null;
         if ($request->has('prilozeniDokument'))
-            $prilozeniDokument = $request->file('prilozeniDokument')->store('casoviDokumenti/', 'public');
+            $prilozeniDokument = $request->file('prilozeniDokument')->store('casoviDokumenti', 'public');
 
         if (Auth::user()->imaMestaZaCas()) {
             PrivatanCas::create([

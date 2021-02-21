@@ -22,7 +22,7 @@ class KonsultacijaTableSeeder extends Seeder
             'naziv' => Str::random(20),
             'opis' => Str::random(135),
             'zakazao_id' => 1,
-            'datum' => Carbon::today()->addDays(rand(6, 365)),
+            'datum' => Carbon::today()->addDays(rand(6, 365))->addHours(rand(0, 100)),
             'max_prijava' => 10,
             'broj_prijava' => 0
 
@@ -35,7 +35,7 @@ class KonsultacijaTableSeeder extends Seeder
             'naziv' => Str::random(20),
             'opis' => Str::random(135),
             'zakazao_id' => 2,
-            'datum' => Carbon::today()->addDays(rand(6, 365)),
+            'datum' => Carbon::today()->addDays(rand(6, 365))->addHours(rand(0, 100)),
             'max_prijava' => 10,
             'broj_prijava' => 0
 
@@ -48,7 +48,7 @@ class KonsultacijaTableSeeder extends Seeder
             'naziv' => Str::random(20),
             'opis' => Str::random(135),
             'zakazao_id' => 3,
-            'datum' => Carbon::today()->addDays(rand(6, 365)),
+            'datum' => Carbon::today()->addDays(rand(6, 365))->addHours(rand(0, 100)),
             'max_prijava' => 10,
             'broj_prijava' => 0
 
@@ -61,7 +61,7 @@ class KonsultacijaTableSeeder extends Seeder
             'naziv' => Str::random(20),
             'opis' => Str::random(135),
             'zakazao_id' => 3,
-            'datum' => Carbon::today()->addDays(rand(6, 365)),
+            'datum' => Carbon::today()->addDays(rand(6, 365))->addHours(rand(0, 100)),
             'max_prijava' => 10,
             'broj_prijava' => 0
 
