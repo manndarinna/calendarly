@@ -25,7 +25,12 @@ class UserController extends Controller
 
     public function getByName(Request $request)
     {
-        $id = User::where('name', $request->query('name'))->first()->id;
+        $id = null;
+        $korisnik = User::where('name', $request->query('name'))->first();
+        if (!$korisnik) {
+            return Redirect::to('http://127.0.0.1:8000/korisnici');
+        } else
+            $id = $korisnik->id;
 
         return Redirect::to('http://127.0.0.1:8000/korisnik/' . $id);
     }
